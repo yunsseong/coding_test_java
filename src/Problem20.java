@@ -15,19 +15,16 @@ class Problem20 {
 
         for(String d : discount) {
             map.put(d, map.getOrDefault(d, 0) + 1);
-
             q.add(d);
             if (q.size() > 10) {
                 String name = q.poll();
-                map.put(name, map.get(name) - 1);
+                if (map.get(name) == 1) {
+                    map.remove(name);
+                } else {
+                    map.put(name, map.get(name) - 1);
+                }
             }
-
-            boolean flag = true;
-            for (String w : want) {
-                if(wantMap.get(w) != map.get(w))
-                    flag = false;
-            }
-            if (flag == true)
+            if (wantMap.equals(map))
                 answer++;
         }
         return answer;
